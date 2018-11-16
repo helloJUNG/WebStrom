@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<meta charset="UTF-8">
+<div class="wrapper">
+    <h1>TODO</h1>
+    <input id="inputt" type="text" onkeydown="JavaScript:Enter_Check();"/>
+    <ul id="listUL">
+    </ul>
+</div>
+<style>
+    .on{
+        text-decoration:line-through;
+    }
+</style>
+<script>
+    function Enter_Check(){
+        // 엔터키의 코드는 13입니다.
+        if(event.keyCode == 13){
+            nameTest();  // 실행할 이벤트
+        }
+    }
+
+    function nameTest() {
+        var value = document.querySelector("#inputt").value;
+        var listUL = document.querySelector("#listUL");
+
+
+        var str = '';
+        str += "<li><input type=\"checkbox\" onclick='click(ul)'/><span  data-target=\"p1\" class=\"todo\">" + value + "</span></li>";
+        var ul = document.querySelector(".todo");
+        console.log(document.querySelector(".todo"));
+        listUL.innerHTML += str;
+    }
+
+    var p1= click("#listUL");
+
+    var current = p1;
+
+    current.setAttribute("class", "#listUL");
+
+    click("#listUL").addEventListener("click",(e)=>{
+        var pid = e.target.getAttribute("data-target");
+        console.log(pid);
+        current.setAttribute("class", ".todo");
+        var targetPanel = find(".todo");
+        targetPanel.setAttribute("class", "todo on");
+        current = targetPanel;
+    },false);
+
+    function click(selector) {
+        selector.setAttribute("class","todo on");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<style>
+  *{
+    margin:0px;
+    padding: 0px;
+  }
+  .menu{
+    position: absolute;
+    z-index: 100;
+  }
+  .wrapper{
+    width:100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+  }
+  .panel{
+    width: 100%;
+    box-sizing: border-box;
+    border:1px solid blueviolet;
+    height:800px;
+  }
+  .p1{
+    background-color: black;
+  }
+  .p2{
+    background-color: red;
+  }
+  .p3{
+    background-color: khaki;
+  }
+  .p4{
+    background-color: blue;
+  }
+</style>
+<div class="wrapper">
+  <div class="menu">
+    <ul>
+      <li><a href="#p1">P1</a> </li>
+      <li><a href="#p2">P2</a> </li>
+      <li><a href="#p3">P3</a> </li>
+      <li><a href="#p4">P4</a> </li>
+
+    </ul>
+  </div>
+  <div id="p1" class="panel p1"></div>
+  <div id="p2" class="panel p2"></div>
+  <div id="p3" class="panel p3"></div>
+  <div id="p4" class="panel p4"></div>
+</div>
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script>
+  todoService.create({title:"점심미팅"},function (result) {
+    alert(result);
+  })
+
+</script>
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+  window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+  ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>

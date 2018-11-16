@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div {
+        box-sizing: border-box;
+    }
+
+    .wrapper {
+        display:flex;
+        width: 50%;
+        height:100vh;
+        background-color: deepskyblue;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 2em;
+        color:white;
+    }
+
+    .input {
+        width: 100%;
+        color:white;
+        border: 1px solid blue;
+    }
+
+    .list {
+        overflow: auto;
+        height: 50vh;
+        margin-top: 0.1em;
+        border: 1px solid blue;
+        width:100%;
+    }
+
+    .list div {
+        border-bottom: 1px solid white;
+        display: flex;
+
+
+    }
+
+    .end {
+        text-decoration: line-through;
+    }
+
+</style>
+
+<div class="wrapper">
+
+    <div class="input" contenteditable="true">
+
+    </div>
+
+    <div class="list">
+    </div>
+    <div class="control">
+        <button>clear</button>
+    </div>
+
+</div>
+
+<script>
+
+    var todoModel = (function(){
+
+        var items = [], idx = 0;
+
+        function add(text){
+
+            items.push( { idx:idx++, content:text, complete:false });
+
+            return items;
+        }
+
+        function changeValue(idx){
+            items[idx].complete = !items[idx].complete;
+        }
+
+        function getList(){
+            return items;
+        }
+
+        return  {
+            add:add,
+            changeValue:changeValue,
+            getList:getList
+        }
+    })();
+
+    var todoView = (function(ele) {
+
+        var ele = ele;
+
+        function showList(list){
+
+            var str = "";
+
+            list.forEach((item) => {
+
+                var checkedStr = item.complete ? "checked": '';
+
+                str+= "<div>";
+                str+= "<input type='checkbox' data-idx ='"+item.idx+"' " + checkedStr + ">";
+                str+= "<div data-idx ='"+item.idx+"' class ='"+ (item.complete?'end':'')+"'>" + item.content +"</div>";
+                str+= "</div>";
+            });
+            ele.innerHTML = str;
+        }
+
+        return {
+            showList:showList
+        };
+
+    })(document.querySelector(".list"));
+
+
+    document.querySelector("body").addEventListener("keypress", (e) => {
+
+        var input = document.querySelector(".input");
+        input.addEventListener("keypress", (e) => { if(e.which == 13) { e.preventDefault() } } ,false);
+
+        if(e.which  == 13){
+            var text = input.innerHTML;
+            if(text.length > 0 ){
+                var list = todoModel.add(text);
+
+                todoView.showList(list);
+
+                input.innerHTML = "";
+            }
+        }
+    });
+
+    document.querySelector(".list").addEventListener("click", (e) => {
+
+        var target = e.target;
+
+        if(target.type == 'checkbox'){
+
+            var idx = target.getAttribute("data-idx");
+            console.log(idx);
+            todoModel.changeValue(idx);
+            todoView.showList(todoModel.getList());
+        }
+    },false);
+
+
+</script>
+
+</body>
+</html>

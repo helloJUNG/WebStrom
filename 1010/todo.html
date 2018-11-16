@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>TODO</h1>
+<div>
+    <input id="text" type="text" name="todo">
+    <button id="inputBtn">입력</button>
+    <button id="removeBtn">삭제</button>
+    <button id="modifyBtn">수정</button>
+
+    <div class="box">
+        <ul id="list"></ul>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        var todo = [];
+
+        $("#inputBtn").on("click", (e) => {
+
+
+            var value = $("#text").val();
+
+
+            console.log(value);
+
+            var todo = $("#list");
+
+            todo.append("<li>" + value + "</li>");
+
+        });
+
+
+        $("#modifyBtn").on("click", "li", function (e) {
+
+            var value = $("#text").val();
+
+
+            var idx = $(this).index();
+            console.log(idx);
+            currentIdx = idx;
+            value.val(todo[idx]);
+
+        });
+
+
+
+
+
+        $("#removeBtn").on("click", (e) => {
+
+            e.preventDefault();  // 폼태그안에 여러개 버튼있을 때 2개 꼭 써라
+            e.stopPropagation(); //위로 전파되는 걸 막겠다.
+
+            var todo = $("#list");
+
+            todo.html("");
+
+        });
+    });
+
+</script>
+</body>
+</html>

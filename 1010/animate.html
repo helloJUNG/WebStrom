@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    .drink{
+        position: absolute;
+        top: 100px;
+        left:100px;
+    }
+    .wrapper{
+        width: 100%;
+        height: 100vh;
+        background-color: yellow;
+    }
+</style>
+
+<div class="wrapper">
+<img class="drink" src ="http://localhost:8080/jsonEx/imgs/1_000.jpg">
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    // var count = 0;
+    //
+    // //0.1초마다 이 함수를 실행하라...
+    // setInterval(function () {
+    //     console.log("..............." + count++);
+    // },100);
+
+    var startX, endX;
+    var direction;
+    var currentPage = 0;
+
+    var sample =$(".drink")
+
+    var host ="http://localhost:8080";
+
+    $(".wrapper").on("touchstart mousedown",function (e) {
+        startX = e.pageX;
+    });
+
+    $(".wrapper").on("touchend mouseup",function (e) {
+        endX = e.pageX;
+
+        var gap = startX - endX;
+
+        direction = gap >0 ? "f":"p";
+        console.log(direction);
+
+        $.getJSON("http://localhost:8080/jsonEx/webtoon",{page:currentPage, dir:direction},function (data) {
+            console.log(data);
+            if(direction ==='f'){
+                currentPage++;
+            }else{
+                currentPage--;
+            }
+
+            sample.attr("src",host+data.dest);
+        });
+
+    });
+
+    // $(".wrapper").on("mousemove",function (e) {
+    //
+    //     var xPos = e.pageX +"px";
+    //     var yPos = e.pageY +"px";
+    //
+    //     console.log(xPos,yPos);
+    //
+    //     $(".drink").animate({left:xPos,top:yPos},0,function () {
+    //        console.log("move end....")
+    //     });
+    //    console.log(e);
+    // });
+
+</script>
+
+
+</body>
+</html>

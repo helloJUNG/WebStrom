@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    .spinner {
+        position: absolute;
+        display: none;
+    }
+</style>
+
+<form class="form" action="http://www.naver.com">
+
+    <img class="spinner" src="12345.gif">
+    <div>
+        <input type="text" name="uid" value="AAA">
+        <span class="msg"></span>
+        <button id="checkBtn">중복체크</button>
+    </div>
+    <div>
+        <input type="password" name="upw">
+    </div>
+    <div>
+        <input type="text" name="email">
+    </div>
+    <div>
+
+        <button>BTN</button>
+
+    </div>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+            console.log("button clicked....");
+
+            var obj ={};
+            obj.uid = $("input[name='uid']").val();
+            obj.upw = $("input[name='upw']").val();
+            obj.email = $("input[name='email']").val();
+
+            $.post("http://10.10.10.94:8080/jsonEx/join",obj,function (text) {
+                alert(text);
+            });
+        });
+
+        $("#checkBtn").on("click", (e) => {
+            e.preventDefault();  // 폼태그안에 여러개 버튼있을 때 2개 꼭 써라
+            e.stopPropagation(); //위로 전파되는 걸 막겠다.
+            console.log("click..............");
+
+            $(".spinner").show("slow");
+
+            var input = $("input[name='uid']");
+            // html() val()
+            //input.val("CCCCCCCCCCC"); //파라미터가 있으면 set
+            var userInput = input.val(); //val 은 Value를 가져온다 . //파라미터가 없으면 get
+
+            $.ajax({
+                url: "http://10.10.10.94:8080/jsonEx/idCheck",
+                data: {str: userInput, pw: "1234"},
+                success: function (result) {
+                    console.log(result);
+
+                    if (result === 'Yes') {
+                        $(".msg").html("해당 아이디는 사용 가능 합니다!!!!");
+                    } else {
+                        alert("사용불가...바꾸소");
+                    }
+                    $(".spinner").hide("slow");
+                }
+            });
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+</html>

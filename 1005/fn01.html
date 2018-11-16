@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="b1" onclick="doA()">click</button>
+<script>
+    //함수는 객체다!
+    //일반 함수 선언
+
+    //내부 함수 선언
+
+    function outer() {
+
+        var total=0;
+
+        function inner() {//접근제한 바깥에서 inner 함수를 절대로 호출 불가.  자바의 private과 동일
+            total++;
+            console.log(total);
+        }
+        inner();
+        inner();
+        inner();
+        inner();
+
+    }
+    outer();
+
+    //파라미터로 전달  event처리를 할때 사용 다른곳에서 사용하지않고 오직 한곳에서만 사용하고싶을때
+    var b1=document.querySelector("#b1");
+    b1.addEventListener("click",function () {
+        console.log("aaa");
+    },false);
+    //리턴타입
+</script>
+</body>
+</html>

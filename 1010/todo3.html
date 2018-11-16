@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="todo.js"></script>
+</head>
+<body>
+
+<div>
+    <input type="text" id="input">
+    <button id = "btn">ADD</button>
+</div>
+<div>
+    <ul class="todoUL"></ul>
+</div>
+
+<script src="todo1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+
+        var input = $("#input");
+        var btn = $("#btn");
+        var todoUL = $(".todoUL");
+
+        function refresh(){
+
+            todoList2.getAll(function (list) { //<- callback list
+
+                var str = "";
+
+                $(list).each(function(idx,todo){
+
+                    str += "<li data-pk ='"+todo.pk+"' >"+todo.title+"+ <button>X</button></li>"
+
+                });
+                todoUL.html(str);
+            })
+
+        };
+
+        refresh();
+        
+       todoUL.on("click","li",function (e) {
+           
+       }) 
+
+       todoUL.on("click","li button",function (e) {
+
+            console.log("Delete...")
+
+            var liObj = $(this).closest("li");
+            console.log(liObj);
+
+            var pkValue = liObj.attr("data-pk");
+            console.log(pkValue);
+            todoList2.remove(pkValue,function (result) {
+                alert("삭제됫다");
+                liObj.remove();
+            });
+        });
+
+        btn.on("click",function () {
+
+            console.log("click....");
+
+            var text = input.val();
+
+            if(text.length ===0){
+                return
+            };
+
+            todoList2.add(text,function (pk) {
+                alert("등록되었습니다~~~");
+                refresh();
+                input.val('');
+            });
+
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

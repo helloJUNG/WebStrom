@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        width:80%;
+        height: 100vh;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+        background-color: aqua;
+    }
+    .wrapper {
+        display: grid;
+        width:100%;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 20vh 60vh 20vh;
+    }
+
+    .facet{
+        box-sizing: border-box;
+        border:1px solid green;
+    }
+    .header{
+        background-color: orange;
+        grid-column:1/4;
+
+    }
+    .main{
+        background-color: white;
+        grid-column: 2/4;
+
+    }
+
+</style>
+
+<div class="container">
+
+    <div class="wrapper">
+
+        <div class="facet header"><h1>Area 1</h1></div>
+        <div class="facet"><h1>Area 2</h1></div>
+        <div class="facet main"><h1>Area 3</h1></div>
+        <div class="facet"><h1>Area 4</h1></div>
+        <div class="facet"><h1>Area 5</h1></div>
+        <div class="facet"><h1>Area 6</h1></div>
+        <div class="facet"><h1>Area 7</h1></div>
+        <div class="facet"><h1>Area 8</h1></div>
+        <div class="facet"><h1>Area 9</h1></div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul id="listUL"></ul>
+
+<script>
+
+    var listUL = document.querySelector("#listUL");
+
+    for(var i = 0; i < 10; i++){
+
+        var fn = function(idx){
+            return  function () {
+                console.log(idx);
+            }
+        };
+
+        var fnReal = fn(i);
+
+        var li = document.createElement("li");
+
+        li.innerHTML = "AAA" + i ;
+
+        li.addEventListener("click", fnReal, false);
+        listUL.appendChild(li);
+    }
+
+</script>
+</body>
+</html>

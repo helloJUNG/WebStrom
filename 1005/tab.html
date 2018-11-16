@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    body {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .panel {
+        width: 80%;
+        height: 60vh;
+        position: absolute;
+        display: none;
+    }
+
+    #p1 {
+        background-color: #ff701d;
+    }
+
+    #p2 {
+        background-color: #ffc73a;
+    }
+
+    #p3 {
+        background-color: #ffbdb3;
+    }
+
+    .on {
+        display: block;
+    }
+
+    .container {
+        width: 80%;
+        height: 100vh;
+        background-color: #ffda97;
+    }
+
+    .upper {
+        margin-top: 20px;
+
+    }
+    .cart{
+        margin-top: 60vh;
+    }
+
+    .upper span {
+
+        color: white;
+        font-size: 3em;
+        padding-top: 10px;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .upper span:nth-child(1) {
+        background-color: #ff701d;
+    }
+
+    .upper span:nth-child(2) {
+        background-color: #ffc73a;
+    }
+
+    .upper span:nth-child(3) {
+        background-color: #ffbdb3;
+    }
+</style>
+
+<div class="container">
+    <div class="upper">
+        <span data-target="p1">Tab1</span>
+        <span data-target="p2">Tab2</span>
+        <span data-target="p3">Tab3</span>
+    </div>
+    <div class="wrapper">
+        <div id="p1" class="panel">
+            PANAL1
+        </div>
+        <div id="p2" class="panel ">
+            PANAL2
+        </div>
+        <div id="p3" class="panel ">
+            PANAL3
+        </div>
+    </div>
+    <div class ="cart">
+        CART
+    </div>
+</div>
+
+<script>
+
+    var p1 = find("#p1"),
+        p2 = find("#p2"),
+        p3 = find("#p3");
+
+    var current = p1;
+
+    current.setAttribute("class", "panel on");
+
+    find(".upper").addEventListener("click",(e)=>{
+        var pid = e.target.getAttribute("data-target");
+        console.log(pid);
+        current.setAttribute("class", "panel");
+        var targetPanel = find("#"+pid);
+        targetPanel.setAttribute("class", "panel on");
+        current = targetPanel;
+    },false);
+
+    function find(selector) {
+        return document.querySelector(selector);
+    }
+
+</script>
+
+</body>
+</html>

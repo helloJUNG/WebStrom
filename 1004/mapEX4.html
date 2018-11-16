@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>지도 생성하기</title>
+
+</head>
+
+<body>
+
+<!-- 지도를 표시할 div 입니다 -->
+<div id="map" style="width:100%;height:50vh;"></div>
+
+
+<style>
+    .wrapper {
+        display: flex;
+        width: 100%;
+        height: 50vh;
+        justify-content: center;
+        align-items: center;
+        background-color: khaki;
+    }
+
+    .listUL {
+        list-style: none;
+        color: dimgray;
+        font-size: 2em;
+    }
+
+    .listUL li {
+        border: 1px solid red;
+
+    }
+</style>
+
+<div class="wrapper">
+    <ul class="listUL">
+    </ul>
+
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=297b7edb621872e2291b6be8e5772ae0"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.570387, 126.985097), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new daum.maps.Map(mapContainer, mapOption);
+
+
+    // var marker = new daum.maps.Marker({
+    //     position: new daum.maps.LatLng(37.570387, 126.985097),
+    //     map: map
+    // });
+
+</script>
+<script>
+    var arr = [
+        {title: '고기팩토리', lat: 37.569820, lng: 126.986001},
+        {title: '갓덴스시', lat: 37.569081, lng: 126.985591},
+        {title: '코다차야', lat: 37.569949, lng: 126.985049},
+        {title: '롯데리아', lat: 37.569857, lng: 126.984923},
+        {title: '초밥의신부타', lat: 37.569440, lng: 126.987367},
+        {title: '청진식당', lat:35.150717, lng:129.028661}
+
+    ];
+    var targetUL = document.querySelector(".listUL");
+    var str = '';
+    var arr2 = [];
+    for (var store of arr) {
+        var storeStr=JSON.stringify(store);
+        str += "<li onclick='show("+storeStr+")'>" + store.title + "</li>";
+
+    }
+    targetUL.innerHTML = str;
+    var marker;
+    function show(obj) {
+        if(marker){
+            marker.setMap(null);
+        }
+        if(infowindow){
+            infowindow.close();
+        }
+
+        marker = new daum.maps.Marker({
+            position: new daum.maps.LatLng(obj.lat,obj.lng),
+            map:map
+        });
+
+        var infowindow = new daum.maps.InfoWindow({
+            content: obj.title // 인포윈도우에 표시할 내용
+        });
+
+        var moveLatLon = new daum.maps.LatLng(obj.lat,obj.lng);
+        daum.maps.event.addListener(marker, 'click', makeOverListener(map,moveLatLon, marker, infowindow));
+        daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow,marker));
+
+    }
+
+
+    function makeOverListener(map,moveLatLon, marker, infowindow) {
+        map.setCenter(moveLatLon);
+        map.panTo(moveLatLon);
+        return function() {
+            infowindow.open(map, marker);
+        };
+    }
+
+    // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+    function makeOutListener(infowindow,marker) {
+        return function() {
+            infowindow.close();
+            marker.setMap(null);
+        };
+    }
+</script>
+
+</body>
+</html>

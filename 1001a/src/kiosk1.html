@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+
+  table {
+    border: 1px solid deepskyblue;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cartTD{
+    width:200px;
+    background-color: chocolate;
+  }
+
+</style>
+
+<table>
+  <tr>
+    <td>
+      <ul>
+        <li><img src = "aba.jpg" width="200" height="200" onclick="addItem('A',3000)">A</li>
+        <li><img src = "abb.jpg" width="200" height="200" onclick="addItem('B',4000)">B</li>
+        <li><img src = "abc.jpg" width="200" height="200" onclick="addItem('C',10000)"> C</li>
+        <li><img src = "abd.jpg" width="200" height="200" onclick="addItem('D',20000)">D</li>
+        <li><img src = "abe.jpg" width="200" height="200" onclick="addItem('E',30000)">E</li>
+      </ul>
+    </td>
+    <td class="cartTD">
+      <h2 id = "total">0</h2>
+      <ul id = "cart">
+
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<script>
+
+  var totalValue = 0;
+  var items = new Array();
+  var totalObj = document.querySelector("#total");
+
+  function findObj(pname) {
+    for(var obj of items){
+      if(obj.pname == pname){
+        return obj;
+      }
+    }
+    return null;
+  }
+
+
+  function addItem(pnum,price){
+
+
+
+    var target = findObj(pnum);
+    if(!target){
+      items.push({pname:pnum, qty:1, price:price});
+    }else{
+      target.qty += 1;
+    }
+
+    console.log(items);
+    showResult();
+  }
+
+  function deleteItem(pname){
+
+    // find index
+    var idx = -1;
+    for(var i = 0; i < items.length;i++){
+      var aitem = items[i];
+      if(aitem.pname == pname){
+        idx = i;
+        break;
+      }
+    }
+    //delete
+    if(idx != -1){
+      items.splice(idx,1);
+    }
+    showResult();
+  }
+
+  function showResult(){
+
+    var itemUL = document.querySelector("#cart");
+    itemUL.innerHTML ="";
+    var sum = 0;
+
+    for(var obj of items){
+
+      var pname = obj.pname;
+      var str = "<li onclick= deleteItem('"+pname+"')>";
+      str += obj.pname +":" + obj.qty;
+      str += "</li>";
+      itemUL.innerHTML += str;
+      sum += obj.price * obj.qty;
+    }
+    totalObj.innerHTML = sum;
+  }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <input type="text" id="input">
+    <button id="btn">ADD</button>
+</div>
+<div>
+    <ul class="todoUL"></ul>
+</div>
+
+<script src="todo.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    console.log(todoList);
+    //jQuery 쓸 때 기본.
+    $(document).ready(function () {
+
+        var input = $("#input");
+        var btn = $("#btn");
+        var todoUL = $(".todoUL");
+        var currentPK;
+
+        function refresh() {
+            todoList.getAll(function (arr) {
+
+                var str = '';
+
+                $(arr).each(function (idx, todo) {
+                    str += "<li data-pk='" + todo.pk + "'>" + todo.title + " <button>X</button></li>";
+                });
+                todoUL.html(str);
+            });
+        }
+
+        refresh();
+
+        todoUL.on("click", "li", function (e) {
+
+            //var liObj = $(this); // 현재 이벤트가 발생..
+            var liObj = $(e.target);
+            console.log(liObj);
+            currentPK = liObj.attr("data-pk");
+            var title = e.target.childNodes[0].nodeValue;
+
+            console.log(title);
+
+            input.val(title);
+            btn.html("MOD");
+
+        });
+
+        todoUL.on("click", "li button", function (e) {
+            e.stopPropagation();
+            console.log("delete button cliked...");
+
+            var liObj = $(this).closest("li");
+            console.log(liObj);
+            var pkValue = liObj.attr("data-pk");
+            console.log(pkValue);
+            todoList.remove(pkValue, function (result) {
+                alert("삭제 되었습니다.");
+                liObj.remove();
+            });
+
+        });//이벤트위임
+
+        btn.on("click", function (e) {
+            console.log("click..."); //버튼이 눌리는지 확인.
+            if (label === "ADD") {
+                var label = e.target.innerHTML;
+
+                var text = input.val(); // .val() 값을 얻어 온다. 함수를 되도록 적게 쓰는 것이 성능이 도움이 된다.
+                if (text.length === 0) {
+                    return
+                }
+
+                //비동기에서는 항상 콜백!
+                todoList.add(text, function (pk) {
+                    alert(pk + "번 글로 등록되었습니다.");
+                    refresh();
+                    input.val('');
+                });
+            } else if (label === 'MOD') {
+                var text = input.val();
+                var obj = {pk: currentPK, title: text};
+                todoList.modify(obj, function (result) {
+                    alert("수정되었습니다.");
+                    refresh();
+                    input.val('');
+                    btn.html("ADD");
+                });
+            };
+        });
+
+    });
+
+</script>
+</body>
+</html>

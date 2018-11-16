@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+    .container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        color: white;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.01) 1%,rgba(0,0,0,0.65) 53%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%);
+    }
+    .wrapper{
+        width: 80%;
+        min-width: 600px;
+        background-color: yellow;
+        height: 100vh;  /* vh는 높이 처리*/
+    }
+    .wrapper div{
+
+        box-sizing: border-box;
+    }
+    .header{
+        height: 10vh;
+        background: linear-gradient(to bottom, rgba(149,149,149,1) 0%,rgba(1,1,1,1) 0%,rgba(1,1,1,1) 0%,rgba(1,1,1,1) 10%,rgba(13,13,13,1) 13%,rgba(13,13,13,1) 13%,rgba(1,1,1,1) 17%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(10,10,10,1) 88%,rgba(10,10,10,1) 88%,rgba(27,27,27,1) 100%);
+    }
+    .pagecenter{
+        height: 80vh;
+        display: flex;
+        background: linear-gradient(to bottom, rgba(149,149,149,1) 0%,rgba(1,1,1,1) 17%,rgba(1,1,1,1) 17%,rgba(13,13,13,1) 46%,rgba(10,10,10,1) 67%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%);
+    }
+    .menu{
+        width:25%;
+    }
+    .main{
+        width: 75%;
+    }
+    .footer{
+        height: 10vh;
+        background: linear-gradient(to bottom, rgba(149,149,149,1) 0%,rgba(1,1,1,1) 0%,rgba(1,1,1,1) 0%,rgba(1,1,1,1) 10%,rgba(13,13,13,1) 13%,rgba(13,13,13,1) 13%,rgba(1,1,1,1) 17%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(10,10,10,1) 88%,rgba(10,10,10,1) 88%,rgba(27,27,27,1) 100%);
+    }
+</style>
+
+<div class="container">
+    <div class="wrapper">
+        <div class ="header">
+            header
+        </div>
+        <div class = "pagecenter">
+            <div class = "menu">
+                Menu
+            </div>
+            <div class = "main">
+                Main
+            </div>
+        </div>
+        <div class = "footer">
+            Footer
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

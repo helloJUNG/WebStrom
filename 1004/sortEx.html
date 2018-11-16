@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //    var arr = [12,43,2,24,21,67];
+    //
+    //    arr.sort((a,b)=>a-b);
+
+    // arr.sort(function (a,b) {
+    //     return a - b;
+    // }); 인터넷익스플로어는 안되니까 function 만들어 쓰는 것이 편할 것....
+
+    //
+    // console.log(arr);
+
+    var current = {
+        lat: 37.570370,
+        lng: 126.984996
+    };
+
+    var arr = [
+
+        {title: '남', lat: 37.568703, lng: 126.984797},
+        {title: '북', lat: 37.575404, lng: 126.983790},
+        {title: '동', lat: 37.570286, lng: 126.986884},
+        {title: '서', lat: 37.570199, lng: 126.977038},
+
+    ];
+
+    function calcDistance(p1,p2) {
+        return Math.sqrt(Math.pow(p1.lat - p2.lat,2)+Math.pow(p1.lng-p2.lng,2)
+        );
+    }
+
+    arr.sort(function (a,b) {
+        var d1 = calcDistance(current,a) * 1000000;
+        var d2 = calcDistance(current,b) * 1000000;
+        return d1 - d2;
+    });
+
+    console.log(arr);
+
+</script>
+
+</body>
+</html>

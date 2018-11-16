@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    .wrapper {
+        color: white;
+        background-color: rosybrown;
+        width: 100%;
+        display: grid;;
+        grid-template:
+                'header header'
+                'header cal'
+                'menu sub'
+                'main main'
+                'footer footer';
+    }
+    .f1{
+        grid-area: header;
+        height: 20vh;
+        grid-template-columns:  2fr;
+        grid-template-rows: 20vh 60vh 20vh;
+    }
+    .f2{
+        grid-area: cal;
+        height:20vh;
+
+    }
+    .f3{
+        grid-area: main;
+        height: 50vh;
+    }
+    .f4{
+        grid-area: footer;
+        height: 10vh;
+    }
+    .f5{
+        grid-area: sub;
+        height: 10vh;
+    }
+
+    @media only screen and (max-width: 800px) {
+        .wrapper {
+
+            display: grid;
+
+            grid-template:
+                    'header '
+                    'menu '
+                    'sub'
+                    'main '
+                    'footer ';
+        }
+        .facet{
+             background-color: midnightblue;
+        }
+        .f2{
+            height: 50px;
+        }
+    }
+
+
+</style>
+
+<div class="container">
+
+    <div class="wrapper">
+
+        <div class="facet f1"><h1>Header</h1></div>
+        <div class="facet f2"><h1>Cal</h1></div>
+        <div class="facet f3"><h1>Area 3</h1></div>
+        <div class="facet f4"><h1>Area 4</h1></div>
+        <div class="facet f5"><h1>Area 5</h1></div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

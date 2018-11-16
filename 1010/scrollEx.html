@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image:url("drink/board.jpg");
+
+    }
+
+    .box {
+        width: 80%;
+        height: 1200px;
+        background-color: white;
+        overflow: auto;
+    }
+
+    .item {
+        height: auto;
+        box-sizing: border-box;
+        border: 1px dotted navajowhite;
+    }
+    .lightbox{
+        position:absolute;
+        width: 100%;
+        height: 100vh;
+        background-color: darkgray;
+        z-index: 100;
+        opacity: 0.7;
+        display: none;
+
+    }
+    .spinner{
+        position: absolute;
+        top:30%;
+        left: 30%;
+        margin-left: -60px;
+        margin-top: -70px;
+
+    }
+</style>
+
+<div class="lightbox">
+    <img src ="12345.gif" class="spinner"/>
+</div>
+
+<div class="container">
+    <div class="box">
+        <div class="item"><img src ="drink/1.jpg"></div>
+        <div class="item"><img src ="drink/2.jpg"></div>
+        <div class="item"><img src ="drink/3.jpg"></div>
+        <div class="item"><img src ="drink/4.jpg"></div>
+        <div class="item"><img src ="drink/5.jpg"></div>
+        <div class="item"><img src ="drink/6.jpg"></div>
+        <div class="item"><img src ="drink/7.jpg"></div>
+        <div class="item"><img src ="drink/8.jpg"></div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">ITEM</div>
+        <div class="item">END</div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var box = $(".box");
+        var boxHeight = box.outerHeight();  //박스넓이
+        var itemHeight = box.find(".item").first().outerHeight();
+        var lightBox = $(".lightbox");
+
+        box.scroll(function (e) {
+
+
+            var size = box.find(".item").length;
+
+            var scrollHeight = box.scrollTop();
+
+            if ((boxHeight + scrollHeight) === (size * itemHeight)) {
+                console.log("END!!!!");
+                addMore();
+            }
+
+        });
+
+        function addMore() {
+            lightBox.show();
+            setTimeout(function () {
+
+                for(var i = 0; i <10; i++){
+                    box.append("<div class='item'>AAA</div>");
+                }
+            lightBox.hide();
+            },1000);
+        }
+    });
+</script>
+
+</body>
+</html>

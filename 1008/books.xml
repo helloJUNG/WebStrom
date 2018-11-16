@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<books>
+    <book id="b1">
+        <title>홍길동전</title>
+        <author>허균</author>
+    </book>
+    <book id="b2">
+        <title>춘향전</title>
+        <author>작자미상</author>
+    </book>
+    <book id="b3">
+        <title>심청전</title>
+        <author>작자미상</author>
+    </book>
+
+</books>

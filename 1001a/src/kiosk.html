@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<style>
+  table {
+    border: 1px solid blue;
+    width:100%;
+    height: 100%;
+  }
+
+  .cartTd {
+    width:200px;
+    background-color: #a4cfff;
+  }
+
+</style>
+
+<table>
+  <tr>
+    <td>
+      <ul>
+        <li><img src="icon.png" onclick="addItem('A',3000)">A</li>
+        <li><img src="icon.png" onclick="addItem('B',4000)">B</li>
+        <li><img src="icon.png" onclick="addItem('C',5000)">C</li>
+        <li><img src="icon.png" onclick="addItem('D',6000)">D</li>
+      </ul>
+    </td>
+    <td class="cartTd">
+      <h2 id="total">0</h2>
+      <ul id="cart">
+
+      </ul>
+    </td>
+  </tr>
+
+</table>
+
+<script>
+
+  var totalValue = 0;
+  var items = new Array();
+  var totalObj = document.querySelector("#total");
+
+  function findObj(pid){
+
+    for(var obj of items){
+      if(obj.pid == pid){
+        return obj;
+      }
+    }
+    return null;
+  }
+
+  function deleteItem(pid) {
+
+    //find index
+    var idx = -1;
+    for(var i=0 ; i<items.length; i++){
+      var aitem = items[i];
+      if(aitem[i].pid == pid){
+        idx = i;
+      break;
+      }
+    }
+    //delete
+    if(idx != -1){
+      items.splice(idx,1);
+
+    }
+    showResult();
+  }
+
+  function addItem(pnum, price){
+
+
+    var target = findObj(pnum);
+    if(!target){
+      items.push({pid:pnum, qty:1,price:price});
+    }else{
+      target.qty += 1;
+    }
+
+    console.log(items);
+
+    showResult();
+  }
+
+  function showResult() {
+
+    var itemUL = document.querySelector("#cart");
+    itemUL.innerHTML = "";
+    var sum = 0;
+    for(var obj of items){
+
+      var pid = obj.pid;
+
+      var str = "<li onclick=deleteItem('"+pid+"')>";
+      str += obj.pid + ":" + obj.qty;
+      str +="</li>";
+      itemUL.innerHTML += str;
+      sum += obj.price*obj.qty;
+    }
+   totalObj.innerHTML = sum;
+  }
+</script>
+
+</body>
+</html>

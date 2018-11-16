@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+
+    .wrapper{
+
+    }
+
+    .dropzone{
+        width: 500px;
+        height: 500px;
+        background-color: navajowhite;
+    }
+
+    .dropzone img{
+        width: 100px;
+        height: 100px;
+    }
+    .result{
+        width: 100%;
+        height: 300px;
+        background-image: url("board.jpg");
+    }
+</style>
+
+<div class="wrapper">
+
+    <div class="dropzone">
+        <img class="item" data-pid="P1" src="7.jpg">
+        <img class="item" data-pid="P2" src="8.jpg">
+        <img class="item" data-pid="P3" src="9.jpg">
+    </div>
+    <div class="result">
+
+    </div>
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".item").draggable({revert:"invalid"});
+        $(".result").droppable({
+
+                drop: function (event, ui) {
+
+                    var pid = $(ui.draggable[0]).attr("data-pid");
+
+                    ui.draggable.draggable("option","revert",true);
+
+                    console.log("bbbbbbb:" + pid);
+
+                    $(".item").data('hover',1);
+                }
+
+        });
+    });
+
+</script>
+
+</body>
+</html>
